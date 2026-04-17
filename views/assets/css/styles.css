@@ -1,7 +1,7 @@
 
 /* Header */
 
-.admin-header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,32 +10,32 @@
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
-.admin-header-brand a {
+header-brand a {
     color: #ffffff;
     font-size: 1.35rem;
     font-weight: 700;
     text-decoration: none;
 }
-.admin-header-nav {
+header-nav {
     display: flex;
     gap: 18px;
 }
-.admin-header-nav a {
+header-nav a {
     color: #e6f1ff;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 }
-.admin-header-nav a:hover {
+header-nav a:hover {
     color: #ffffff;
 }
 @media (max-width: 768px) {
-    .admin-header {
+    header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
-    .admin-header-nav {
+    header-nav {
         flex-wrap: wrap;
         gap: 12px;
     }

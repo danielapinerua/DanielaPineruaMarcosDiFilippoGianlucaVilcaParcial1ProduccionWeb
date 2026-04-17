@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <?php
+        include_once('./componentes/header.php');
+    ?>
     <main>
         <section>
 
