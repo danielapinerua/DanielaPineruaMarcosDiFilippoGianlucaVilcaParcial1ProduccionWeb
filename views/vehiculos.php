@@ -20,6 +20,7 @@ require_once('../src/clases/Vehiculo.php');
 $vehiculosDisponibles = Vehiculo::getContador();
 ?> 
 <p>Hay <?php echo $vehiculosDisponibles; ?> vehículos disponibles.</p>
+
         </section>
     </main>
     <?php
