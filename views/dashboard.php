@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <a href="vehiculos.php">Ver vehículos</a><br>
 
 <?php if ($_SESSION['rol'] === 'admin'): ?>
-    <a href="usuarios.php">Gestionar usuarios</a><br>
+    <a href="gestion_usuarios.php">Gestionar usuarios</a><br>
 <?php endif; ?>
 
 <a href="../action/sesion/cerrar_sesion.php">Cerrar sesión</a>

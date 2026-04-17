@@ -18,9 +18,10 @@ if ($usuario && password_verify($password, $usuario['password'])) {
     $_SESSION['rol'] = $usuario['rol'];
     $_SESSION['nombre'] = $usuario['nombre'];
 
-    header("Location: dashboard.php");
+    header("Location: ../../views/dashboard.php");
     exit;
 
 } else {
-    echo "Email o contraseña incorrectos";
+    header("Location: ../../views/login.php?error=1");
+    exit;
 }

@@ -7,6 +7,9 @@
 </head>
 <body>
     <main>
+         <?php if (isset($_GET['error'])): ?>
+    <p style="color:red;">Email o contraseña incorrectos</p>
+<?php endif; ?>
         <form method="POST" action="../action/sesion/procesar_login.php">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Contraseña" required>
