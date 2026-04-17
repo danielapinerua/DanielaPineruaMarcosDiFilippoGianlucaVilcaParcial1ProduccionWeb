@@ -22,10 +22,10 @@
         <section>
             <h2>Crear usuario</h2>
 
-            <form method="POST" action="guardar_usuario.php">
-                <input type="text" name="nombre" placeholder="Nombre" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Contraseña" required>
+<form method="POST" action="../action/CRUD_Usuarios/guardar_usuario.php">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
 
                 <select name="rol">
                     <option value="empleado">Empleado</option>
