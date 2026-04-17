@@ -104,7 +104,7 @@
         exit;
     }
 
-    $action = htmlspecialchars($_GET["action"]);
+    $action = $_GET["action"] ?? '';
 
     $vehiculoServicio = null;
 
