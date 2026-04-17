@@ -9,8 +9,8 @@ session_start();
   </div>
 
   <nav>
-     <a href="../dashboard.php">Inicio</a>
-    <a href="../vehiculos.php">Vehículos</a>
+     <a href="./dashboard.php">Inicio</a>
+    <a href="./vehiculos.php">Vehículos</a>
 
     <?php if (isset($_SESSION['usuario_id'])): ?>
         <a href="../dashboard.php">Inicio</a>
@@ -21,7 +21,7 @@ session_start();
 
         <a href="../../action/sesion/logout.php">Cerrar sesión</a>
     <?php else: ?>
-        <a href="../login.php">Iniciar sesión</a>
+        <a href="./login.php">Iniciar sesión</a>
     <?php endif; ?>
 
   </nav>
