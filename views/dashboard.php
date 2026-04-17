@@ -15,4 +15,4 @@ if (!isset($_SESSION['usuario_id'])) {
     <a href="usuarios.php">Gestionar usuarios</a><br>
 <?php endif; ?>
 
-<a href="logout.php">Cerrar sesión</a>
+<a href="../action/sesion/cerrar_sesion.php">Cerrar sesión</a>

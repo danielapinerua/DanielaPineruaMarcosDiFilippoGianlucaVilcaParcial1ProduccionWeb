@@ -7,7 +7,7 @@
 </head>
 <body>
     <main>
-        <form method="POST" action="procesar_login.php">
+        <form method="POST" action="../action/sesion/procesar_login.php">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Contraseña" required>
     <button type="submit">Ingresar</button>

@@ -13,7 +13,6 @@ class BD
             if (self::$connection === null) {
                 try {
                     self::$connection = new PDO('mysql:host=' . self::$host . ';dbname=' . self::$db, self::$user, self::$pass);
-
                     self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     
                 } catch (PDOException $e) {
