@@ -38,4 +38,9 @@ class Usuario {
     public function setEmail($email) {
         $this->email = $email;
     }
+
+    public function setRol($rol) {
+    $this->rol = $rol;
+}
+
 }

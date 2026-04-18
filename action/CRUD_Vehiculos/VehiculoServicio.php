@@ -162,19 +162,27 @@
     }
 
     //en cada case luego llamamos al vehiculoServicio->el metodo para (crear, eliminar o actualizar)
-    switch ($action) {
+   switch ($action) {
+
     case "crear":
+        $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
+        $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
         $vehiculoServicio->crear();
         break;
 
     case "actualizar":
+        $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
+        $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
         $vehiculoServicio->actualizar($_POST['id']);
         break;
 
     case "eliminar":
+        $vehiculoServicio = new VehiculoServicio(
+            new Vehiculo('', '', 0, 0, '', '', '', 0, '')
+        );
         $vehiculoServicio->eliminar($_POST['id']);
         break;
+        //esto lo hago porque para eliminar no necesito validar los datos del vehiculo, solo necesito el id, entonces creo un vehiculo vacio para poder usar el mismo servicio y llamar al metodo eliminar
 }
-
     header('Location: ../../views/vehiculos.php?ok=1');
     exit;
