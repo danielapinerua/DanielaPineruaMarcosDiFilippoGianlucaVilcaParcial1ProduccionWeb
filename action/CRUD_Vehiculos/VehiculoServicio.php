@@ -1,205 +1,170 @@
 <?php
-    require_once('../../src/clases/Vehiculo.php');
-    require_once('../../exceptions/VehiculoException.php');
-    require_once('../../src/interfaces/Gestionable.php');
+require_once('../../src/clases/Vehiculo.php');
+require_once('../../exceptions/VehiculoException.php');
+require_once('../../src/interfaces/Gestionable.php');
 
-    class VehiculoServicio implements Gestionable {
-        private Vehiculo $vehiculo;
+class VehiculoServicio implements Gestionable {
+    private Vehiculo $vehiculo;
 
-        public function __construct(Vehiculo $vehiculo)
-        {
-            $this->vehiculo = $vehiculo;
-        }
-        
-        public function crear () {
-             $conexion = BD::getInstancia();
-    $sql = "INSERT INTO vehiculos 
-    (marca, modelo, anio, precio, tipo, color, imagen, usuario_id, transmision) 
-    VALUES (:marca, :modelo, :anio, :precio, :tipo, :color, :imagen, :usuario_id, :transmision)";
-
-    $stmt = $conexion->prepare($sql);
-
-    $stmt->execute([
-        ':marca' => $this->vehiculo->getMarca(),
-        ':modelo' => $this->vehiculo->getModelo(),
-        ':anio' => $this->vehiculo->getAnio(),
-        ':precio' => $this->vehiculo->getPrecio(),
-        ':tipo' => $this->vehiculo->getTipo(),
-        ':color' => $this->vehiculo->getColor(),
-        ':imagen' => $this->vehiculo->getImagen(),
-        ':usuario_id' => $this->vehiculo->getUsuarioId(),
-        ':transmision' => $this->vehiculo->getTransmision()
-    ]);
-        }
-
-        public function actualizar ($id) {
-             $conexion = BD::getInstancia();
-             $sql = "UPDATE vehiculos SET 
-             marca = :marca,
-             modelo = :modelo,
-             anio = :anio,
-             precio = :precio,
-             tipo = :tipo,
-             color = :color,
-             imagen = :imagen,
-             transmision = :transmision
-             WHERE id = :id";
-             $stmt = $conexion->prepare($sql);
-             $stmt->execute([
-                ':marca' => $this->vehiculo->getMarca(),
-                ':modelo' => $this->vehiculo->getModelo(),
-                ':anio' => $this->vehiculo->getAnio(),
-                ':precio' => $this->vehiculo->getPrecio(),
-                ':tipo' => $this->vehiculo->getTipo(),
-                ':color' => $this->vehiculo->getColor(),
-                ':imagen' => $this->vehiculo->getImagen(),
-                ':transmision' => $this->vehiculo->getTransmision(),
-                ':id' => $id]);
-                 }
-
-        public function eliminar ($id) {
-                $conexion = BD::getInstancia();
-                $sql = "DELETE FROM vehiculos WHERE id = :id";
-                $stmt = $conexion->prepare($sql);
-                $stmt->execute([':id' => $id]);
-
-        }
-        
-        public static function contarVehiculos() {
-    $conexion = BD::getInstancia();
-    $sql = "SELECT COUNT(*) as total FROM vehiculos";
-    $stmt = $conexion->query($sql);
-    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $resultado['total'];
-}
-
-public static function obtenerVehiculos() {
-    $conexion = BD::getInstancia();
-    $sql = "SELECT * FROM vehiculos";
-    $stmt = $conexion->query($sql);
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-        /**
-         * @throws VehiculoException
-         */
-        public static function validarDatosVehiculo (array $datosVehiculo) : Vehiculo {
-            if (empty($datosVehiculo)) {
-                throw new VehiculoException('No se recibieron datos del vehículo.');
-            }
-
-            // el operador ?? hace que si por ejemplo $datosVehiculo['marca'] es null entonces le asigna valor por default ''
-
-            $marca = trim($datosVehiculo['marca'] ?? '');
-            $modelo = trim($datosVehiculo['modelo'] ?? '');
-            $anio = trim($datosVehiculo['anio'] ?? '');
-            $precio = trim($datosVehiculo['precio'] ?? '');
-            $tipo = trim($datosVehiculo['tipo'] ?? '');
-            $color = trim($datosVehiculo['color'] ?? '');
-            $imagen = trim($datosVehiculo['imagen'] ?? '');
-            $usuario_id = trim($datosVehiculo['usuario_id'] ?? '');
-            $transmision = trim($datosVehiculo['transmision'] ?? '');
-
-            if ($marca === '') {
-                throw new VehiculoException('La marca es obligatoria.');
-            }
-
-            if ($modelo === '') {
-                throw new VehiculoException('El modelo es obligatorio.');
-            }
-
-            if ($anio === '' || !ctype_digit($anio) || (int)$anio < 1886 || (int)$anio > (int)date('Y') + 1) {
-                throw new VehiculoException('El año del vehículo no es válido.');
-            }
-
-            if ($precio === '' || !is_numeric($precio) || (float) $precio <= 0) {
-                throw new VehiculoException('El precio debe ser un número mayor que cero.');
-            }
-
-            if ($tipo === '') {
-                throw new VehiculoException('El tipo de vehículo es obligatorio.');
-            }
-
-            if ($color === '') {
-                throw new VehiculoException('El color es obligatorio.');
-            }
-
-            if ($imagen === '') {
-                throw new VehiculoException('La imagen del vehículo es obligatoria.');
-            }
-
-            if ($usuario_id === '' || (int) $usuario_id <= 0) {
-                throw new VehiculoException('El usuario asociado no es válido.');
-            }
-
-            if ($transmision === '') {
-                throw new VehiculoException('La transmisión es obligatoria.');
-            }
-
-            return new Vehiculo(
-                $marca,
-                $modelo,
-                (int) $anio,
-                (float) $precio,
-                $tipo,
-                $color,
-                $imagen,
-                (int) $usuario_id,
-                $transmision
-            );
-        }
+    public function __construct(Vehiculo $vehiculo)
+    {
+        $this->vehiculo = $vehiculo;
     }
-
-    if ($_SERVER["REQUEST_METHOD"] != "POST") {
-        exit;
-    }   
-
-    //action puede ser crear, eliminar o actualizar, se va enviar cuando se envie el formulario
-
-    //podemos enviar la accion que va hacer por un input hidden en el formulario o simplemente por la url, despues lo vemos eso
     
-    if (!isset($_GET["action"])) {
-        exit;
+    public function crear () {
+        $conexion = BD::getInstancia();
+
+        $sql = "INSERT INTO vehiculos 
+        (marca, modelo, anio, precio, tipo, color, imagen, usuario_id, transmision) 
+        VALUES (:marca, :modelo, :anio, :precio, :tipo, :color, :imagen, :usuario_id, :transmision)";
+
+        $stmt = $conexion->prepare($sql);
+
+        $stmt->execute([
+            ':marca' => $this->vehiculo->getMarca(),
+            ':modelo' => $this->vehiculo->getModelo(),
+            ':anio' => $this->vehiculo->getAnio(),
+            ':precio' => $this->vehiculo->getPrecio(),
+            ':tipo' => $this->vehiculo->getTipo(),
+            ':color' => $this->vehiculo->getColor(),
+            ':imagen' => $this->vehiculo->getImagen(),
+            ':usuario_id' => $this->vehiculo->getUsuarioId(),
+            ':transmision' => $this->vehiculo->getTransmision()
+        ]);
     }
 
-    $action = $_GET["action"] ?? '';
+    public function actualizar ($id) {
+        $conexion = BD::getInstancia();
 
-    $vehiculoServicio = null;
+        $sql = "UPDATE vehiculos SET 
+        marca = :marca,
+        modelo = :modelo,
+        anio = :anio,
+        precio = :precio,
+        tipo = :tipo,
+        color = :color,
+        imagen = :imagen,
+        transmision = :transmision
+        WHERE id = :id";
 
-    try {
-        $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
+        $stmt = $conexion->prepare($sql);
 
-        $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
+        $stmt->execute([
+            ':marca' => $this->vehiculo->getMarca(),
+            ':modelo' => $this->vehiculo->getModelo(),
+            ':anio' => $this->vehiculo->getAnio(),
+            ':precio' => $this->vehiculo->getPrecio(),
+            ':tipo' => $this->vehiculo->getTipo(),
+            ':color' => $this->vehiculo->getColor(),
+            ':imagen' => $this->vehiculo->getImagen(),
+            ':transmision' => $this->vehiculo->getTransmision(),
+            ':id' => $id
+        ]);
     }
-    catch (Exception $e) {
-        header('Location: ../../views/vehiculos.php?error=' . $e->getMessage());
-        exit;
+
+    public function eliminar ($id) {
+        $conexion = BD::getInstancia();
+        $sql = "DELETE FROM vehiculos WHERE id = :id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute([':id' => $id]);
     }
 
-    //en cada case luego llamamos al vehiculoServicio->el metodo para (crear, eliminar o actualizar)
-   switch ($action) {
+    public static function contarVehiculos() {
+        $conexion = BD::getInstancia();
+        $sql = "SELECT COUNT(*) as total FROM vehiculos";
+        $stmt = $conexion->query($sql);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+    }
+
+    public static function obtenerVehiculos() {
+        $conexion = BD::getInstancia();
+        $sql = "SELECT * FROM vehiculos";
+        $stmt = $conexion->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function validarDatosVehiculo (array $datosVehiculo) : Vehiculo {
+        if (empty($datosVehiculo)) {
+            throw new VehiculoException('No se recibieron datos del vehículo.');
+        }
+
+        $marca = trim($datosVehiculo['marca'] ?? '');
+        $modelo = trim($datosVehiculo['modelo'] ?? '');
+        $anio = trim($datosVehiculo['anio'] ?? '');
+        $precio = trim($datosVehiculo['precio'] ?? '');
+        $tipo = trim($datosVehiculo['tipo'] ?? '');
+        $color = trim($datosVehiculo['color'] ?? '');
+        $imagen = trim($datosVehiculo['imagen'] ?? '');
+        $usuario_id = trim($datosVehiculo['usuario_id'] ?? '');
+        $transmision = trim($datosVehiculo['transmision'] ?? '');
+
+        if ($marca === '') throw new VehiculoException('La marca es obligatoria.');
+        if ($modelo === '') throw new VehiculoException('El modelo es obligatorio.');
+        if ($anio === '' || !ctype_digit($anio)) throw new VehiculoException('Año inválido.');
+        if ($precio === '' || !is_numeric($precio)) throw new VehiculoException('Precio inválido.');
+        if ($tipo === '') throw new VehiculoException('Tipo obligatorio.');
+        if ($color === '') throw new VehiculoException('Color obligatorio.');
+        if ($imagen === '') throw new VehiculoException('Imagen obligatoria.');
+        if ($usuario_id === '' || (int)$usuario_id <= 0) throw new VehiculoException('Usuario inválido.');
+        if ($transmision === '') throw new VehiculoException('Transmisión obligatoria.');
+
+        return new Vehiculo(
+            $marca,
+            $modelo,
+            (int)$anio,
+            (float)$precio,
+            $tipo,
+            $color,
+            $imagen,
+            (int)$usuario_id,
+            $transmision
+        );
+    }
+}
+
+/* ================== PROCESO ================== */
+
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    exit;
+}
+
+$action = $_GET["action"] ?? '';
+
+try {
+
+    // ===== SUBIR IMAGEN (ANTES DE VALIDAR) =====
+    $nombreImagen = $_FILES['imagen']['name'] ?? '';
+    $tmp = $_FILES['imagen']['tmp_name'] ?? '';
+
+    if ($nombreImagen && $tmp) {
+        $nombreFinal = time() . "_" . $nombreImagen;
+        move_uploaded_file($tmp, "../../imagenes/" . $nombreFinal);
+        $_POST['imagen'] = $nombreFinal;
+    }
+
+    $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
+    $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
+
+} catch (Exception $e) {
+    header('Location: ../../views/vehiculos.php?error=' . $e->getMessage());
+    exit;
+}
+
+switch ($action) {
 
     case "crear":
-        $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
-        $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
         $vehiculoServicio->crear();
         break;
 
     case "actualizar":
-        $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
-        $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
         $vehiculoServicio->actualizar($_POST['id']);
         break;
 
     case "eliminar":
-        $vehiculoServicio = new VehiculoServicio(
-            new Vehiculo('', '', 0, 0, '', '', '', 0, '')
-        );
         $vehiculoServicio->eliminar($_POST['id']);
         break;
-        //esto lo hago porque para eliminar no necesito validar los datos del vehiculo, solo necesito el id, entonces creo un vehiculo vacio para poder usar el mismo servicio y llamar al metodo eliminar
 }
-    header('Location: ../../views/vehiculos.php?ok=1');
-    exit;
+
+header('Location: ../../views/vehiculos.php?ok=1');
+exit;

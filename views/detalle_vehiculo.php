@@ -14,7 +14,7 @@ $vehiculo = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <main>
     <h1><?php echo $vehiculo['marca'] . " " . $vehiculo['modelo']; ?></h1>
-    <img src="../img/<?php echo $vehiculo['imagen']; ?>" width="300">
+    <img src="../imagenes/<?php echo $vehiculo['imagen']; ?>" width="300" alt="vehiculo">
     <p>Año: <?php echo $vehiculo['anio']; ?></p>
     <p>Precio: $<?php echo $vehiculo['precio']; ?></p>
     <p>Tipo: <?php echo $vehiculo['tipo']; ?></p>
