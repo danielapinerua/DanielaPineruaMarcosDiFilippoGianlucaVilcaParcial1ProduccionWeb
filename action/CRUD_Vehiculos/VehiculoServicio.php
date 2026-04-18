@@ -73,6 +73,14 @@
     return $resultado['total'];
 }
 
+public static function obtenerVehiculos() {
+    $conexion = BD::getInstancia();
+    $sql = "SELECT * FROM vehiculos";
+    $stmt = $conexion->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
         /**
          * @throws VehiculoException
