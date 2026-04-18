@@ -142,6 +142,10 @@ try {
         move_uploaded_file($tmp, "../../imagenes/" . $nombreFinal);
         $_POST['imagen'] = $nombreFinal;
     }
+    // Si NO sube nueva imagen, mantener la anterior
+    if (empty($_FILES['imagen']['name'])) {
+    $_POST['imagen'] = $_POST['imagen_actual'] ?? '';
+    }
 
     $vehiculoValidado = VehiculoServicio::validarDatosVehiculo($_POST);
     $vehiculoServicio = new VehiculoServicio($vehiculoValidado);
@@ -162,8 +166,18 @@ switch ($action) {
         break;
 
     case "eliminar":
-        $vehiculoServicio->eliminar($_POST['id']);
-        break;
+
+    // buscar imagen
+    $conexion = BD::getInstancia();
+    $stmt = $conexion->prepare("SELECT imagen FROM vehiculos WHERE id = :id");
+    $stmt->execute([':id' => $_POST['id']]);
+    $vehiculo = $stmt->fetch(PDO::FETCH_ASSOC);
+    // borrar archivo
+    if ($vehiculo && file_exists("../../imagenes/" . $vehiculo['imagen'])) {
+        unlink("../../imagenes/" . $vehiculo['imagen']);
+    }
+    $vehiculoServicio->eliminar($_POST['id']);
+    break;
 }
 
 header('Location: ../../views/vehiculos.php?ok=1');
