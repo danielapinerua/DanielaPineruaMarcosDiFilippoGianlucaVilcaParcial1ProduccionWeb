@@ -8,9 +8,9 @@ $vehiculos = VehiculoServicio::obtenerVehiculos();
 ?>
 
 <main>
+<section>
     <h2>Vehículos</h2>
     <p>Hay <?php echo $vehiculosDisponibles; ?> vehículos disponibles.</p>
-    <section class="contenedor">
         <?php foreach ($vehiculos as $v): ?>
 
             <a href="detalle_vehiculo.php?id=<?php echo (int)$v['id']; ?>" class="card">
