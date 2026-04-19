@@ -42,7 +42,7 @@
     <?php foreach ($vehiculos as $v): ?>
     <tr>
         <td>
-            <img src="../imagenes/<?php echo $v['imagen']; ?>" width="100">
+            <img src="../imagenes/<?php echo $v['imagen'] . ".webp"; ?>" width="100">
         </td>
         <td><?php echo $v['marca']; ?></td>
         <td><?php echo $v['modelo']; ?></td>
