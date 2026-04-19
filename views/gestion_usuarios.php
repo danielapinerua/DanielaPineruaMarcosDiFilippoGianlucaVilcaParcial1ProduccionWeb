@@ -49,6 +49,7 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Rol</th>
+                    <th>Contraseña</th>
                     <th>Acciones</th>
                 </tr>
 
@@ -58,6 +59,7 @@
                         <td><?php echo $u['nombre']; ?></td>
                         <td><?php echo $u['email']; ?></td>
                         <td><?php echo $u['rol']; ?></td>
+                        <td><?php echo $u['password']; ?></td>
 
                         <td>
                             <a href="editar_usuario.php?id=<?php echo $u['id']; ?>">Editar</a>
