@@ -15,7 +15,9 @@
   <div class="nav-overlay"></div>
   <header>
     <div>
-      <h1>Agencia Da-Vinci</h1>
+      <a href="./inicio.php">
+        <h1>Agencia Da-Vinci</h1>
+      </a>
     </div>
 
     <button class="nav-toggle">

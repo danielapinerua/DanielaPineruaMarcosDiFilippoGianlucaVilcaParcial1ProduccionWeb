@@ -1,0 +1,202 @@
+main {
+    max-width: 1100px;
+    margin: 66px auto 80px;
+    padding: 2rem 2.5rem;
+}
+
+/* Migas de pan */
+.migas {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9CA3AF;
+    margin-bottom: 1.5rem;
+}
+
+.migas a {
+    color: #9CA3AF;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.migas a:hover {
+    color: #111827;
+}
+
+.migas span:last-child {
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Layout principal: 2 columnas */
+.contenedor-detalle {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.galeria {
+    width: 100%;
+}
+
+/* Imagen */
+.imagen-wrap {
+    border-radius: 8px;
+    border: 1px solid #E8ECF4;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #EEF2FF;
+}
+
+.imagen-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.imagen-wrap:hover img {
+    transform: scale(1.03);
+}
+
+/* Info */
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.anio {
+    font-size: 11px;
+    font-weight: 500;
+    color: #9CA3AF;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+}
+
+.titulo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+    margin: 0 0 8px;
+}
+
+/* Precio */
+.precio-wrap {
+    margin: 8px 0 18px;
+}
+
+.precio-label {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.precio {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4F46E5;
+    line-height: 1;
+}
+
+.precio sup {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #9CA3AF;
+    vertical-align: super;
+}
+
+/* Separador */
+.separador {
+    height: 1px;
+    background: #E8ECF4;
+    margin: 0 0 16px;
+}
+
+/* Especificaciones */
+.especificaciones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    margin-bottom: 22px;
+}
+
+.spec {
+    background: #F9FAFB;
+    border: 1px solid #E8ECF4;
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.spec-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+}
+
+.spec-valor {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Botón volver */
+.btn-volver {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    color: #4F46E5;
+    border: 1.5px solid #C7D2FE;
+    border-radius: 10px;
+    padding: 13px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-volver:hover {
+    background: #EEF2FF;
+    border-color: #4F46E5;
+}
+
+.btn-volver > svg {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.btn-volver:hover > svg {
+    transform: translateX(-50%);
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    main {
+        padding: 1.5rem 1rem;
+        margin-top: 56px;
+    }
+
+    .contenedor-detalle {
+        flex-direction: column;
+    }
+
+    .titulo {
+        font-size: 1.3rem;
+    }
+
+    .precio {
+        font-size: 1.7rem;
+    }
+}
