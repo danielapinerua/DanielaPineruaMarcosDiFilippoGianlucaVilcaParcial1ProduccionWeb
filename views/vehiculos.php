@@ -16,7 +16,7 @@
             <?php foreach ($vehiculos as $v): ?>
 
                 <a href="detalle_vehiculo.php?id=<?php echo (int)$v['id']; ?>" class="card">
-                    <img src="../imagenes/<?php echo $v['imagen']; ?>" alt="vehiculo">
+                    <img src="../imagenes/<?php echo $v['imagen'] . ".webp"; ?>" alt="vehiculo">
                     <h3><?php echo $v['marca'] . " " . $v['modelo']; ?></h3>
                     <p>Año: <?php echo $v['anio']; ?></p>
                     <p>Precio: $<?php echo $v['precio']; ?></p>
