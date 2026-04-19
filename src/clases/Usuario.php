@@ -3,13 +3,13 @@
 require_once __DIR__ . '/../../exceptions/UsuarioException.php';
 
 class Usuario {
-    private int $id;
+    private ?int $id;
     private string $nombre;
     private string $email;
     private string $password;
     private string $rol;
 
-    public function __construct(int $id, string $nombre, string $email, string $password, string $rol) {
+    public function __construct(?int $id, string $nombre, string $email, string $password, string $rol) {
         $this->id = $id;
         $this->setNombre($nombre);
         $this->setEmail($email);
@@ -54,12 +54,12 @@ class Usuario {
     }
 
     public function setPassword(string $password): void {
-        if (!empty($password) && strlen($password) >= 6) {
-            $this->password = $password;
-        } else {
-            throw new UsuarioException("Contraseña inválida (mínimo 6 caracteres)");
-        }
+    if (empty($password) || strlen($password) >= 6) {
+        $this->password = $password;
+    } else {
+        throw new UsuarioException("Contraseña inválida (mínimo 6 caracteres)");
     }
+}
 
    public function setRol(string $rol): void {
     $this->rol = $rol;
