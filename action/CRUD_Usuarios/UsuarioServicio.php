@@ -24,22 +24,23 @@
                 ':rol' => $this->usuario->getRol()
             ]);
         }
-
-        public function actualizar($id)
-        {
-            self::validarIdUsuario($id);
-
-            $conexion = BD::getInstancia();
-            $sql = "UPDATE usuarios SET nombre = :nombre, email = :email, password = :password, rol = :rol WHERE id = :id";
-            $stmt = $conexion->prepare($sql);
-            $stmt->execute([
-                ':nombre' => $this->usuario->getNombre(),
-                ':email' => $this->usuario->getEmail(),
-                ':password' => md5($this->usuario->getPassword()),
-                ':rol' => $this->usuario->getRol(),
-                ':id' => (int)$id
-            ]);
-        }
+        
+        public function actualizar($id){
+    self::validarIdUsuario($id);
+    $conexion = BD::getInstancia();
+    $sql = "UPDATE usuarios SET 
+        nombre = :nombre, 
+        email = :email, 
+        rol = :rol 
+        WHERE id = :id";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute([
+        ':nombre' => $this->usuario->getNombre(),
+        ':email' => $this->usuario->getEmail(),
+        ':rol' => $this->usuario->getRol(),
+        ':id' => (int)$id
+    ]);
+}
 
         public function eliminar($id)
         {
@@ -51,6 +52,24 @@
             $stmt->execute([':id' => (int)$id]);
         }
 
+        private static function existeEmail($email, $id = null){
+            $conexion = BD::getInstancia();
+            if ($id) {
+        // Para editar (excluir el mismo usuario)
+        $sql = "SELECT id FROM usuarios WHERE email = :email AND id != :id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute([
+            ':email' => $email,
+            ':id' => $id
+            ]);
+            } else {
+                // Para crear
+                $sql = "SELECT id FROM usuarios WHERE email = :email";
+                $stmt = $conexion->prepare($sql);
+                $stmt->execute([':email' => $email]);
+                }
+                return $stmt->fetch() ? true : false;
+                }
         public static function validarDatosUsuario (array $datosUsuario) {
             
             if (empty($datosUsuario)) {
@@ -75,9 +94,11 @@
                 throw new UsuarioException('El email no es válido.');
             }
 
-            // Validar password
-            if ($password === '') {
-                throw new UsuarioException('La contraseña es obligatoria.');
+            //validar password solo para creación
+            if (isset($datosUsuario['password'])) {
+                if ($password === '') {
+                    throw new UsuarioException('La contraseña es obligatoria.');
+                }
             }
 
             // Validar rol
@@ -87,6 +108,11 @@
             if ($rol !== 'admin' && $rol !== 'empleado') {
                 throw new UsuarioException('El rol debe ser admin o empleado.');
             }
+
+            // Validar email duplicado
+            if (self::existeEmail($email, $datosUsuario['id'] ?? null)) {
+                 throw new UsuarioException('El email ya está registrado.');
+                 }
 
             return new Usuario(null, $nombre, $email, $password, $rol);
         }
@@ -125,13 +151,14 @@
 
                 $usuarioServicio->crear();
             }
-            elseif ($action == "actualizar") {
-
-                $usuarioValidado = UsuarioServicio::validarDatosUsuario($datosUsuario);
-                $usuarioServicio = new UsuarioServicio($usuarioValidado);
-
-                $usuarioServicio->actualizar($_POST['id']);
-
+           elseif ($action == "actualizar") {
+            // eliminamos password
+            unset($datosUsuario['password']);
+            // 👉 ESTA ES LA CLAVE
+            $datosUsuario['id'] = $_POST['id'];
+            $usuarioValidado = UsuarioServicio::validarDatosUsuario($datosUsuario);
+            $usuarioServicio = new UsuarioServicio($usuarioValidado);
+            $usuarioServicio->actualizar($_POST['id']);
             }
             elseif ($action == "eliminar") {
 

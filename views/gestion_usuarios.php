@@ -2,6 +2,19 @@
         include_once('componentes/header.php');
         include_once('componentes/session.php');
     ?>
+    <?php
+    // Verificar que sea admin
+    if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    header('Location: ../index.php'); 
+    exit;
+    }
+?>
+    <?php if (isset($_GET['ok'])): ?>
+        <p style="color: green;">Operación realizada con éxito</p>
+        <?php endif; ?>
+        <?php if (isset($_GET['error'])): ?>
+    <p><?php echo htmlspecialchars($_GET['error']); ?></p>
+<?php endif; ?>
     <link rel="stylesheet" href="assets/css/gestion_usuarios.css">
     <main>
         <section>
