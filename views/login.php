@@ -2,12 +2,13 @@
         include_once('componentes/header.php');    
     ?>
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 
     <main>
         <section>
             
             <?php if (isset($_GET['error'])): ?>
-                <p>Email o contraseña incorrectos</p>
+                <p class="error">Email o contraseña incorrectos</p>
             <?php endif; ?>
 
             <h2>Iniciar Sesion</h2>
