@@ -124,7 +124,7 @@
         }
     }
 
-    /* ================== PROCESO ================== */
+    /* PROCESO */
     $action = $_GET["action"] ?? '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -154,7 +154,7 @@
            elseif ($action == "actualizar") {
             // eliminamos password
             unset($datosUsuario['password']);
-            // 👉 ESTA ES LA CLAVE
+            
             $datosUsuario['id'] = $_POST['id'];
             $usuarioValidado = UsuarioServicio::validarDatosUsuario($datosUsuario);
             $usuarioServicio = new UsuarioServicio($usuarioValidado);

@@ -138,7 +138,7 @@
     }
 }
 
-/* ================== PROCESO ================== */
+/*PROCESO  */
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_GET["action"] ?? '';
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $datosVehiculo['usuario_id'] = $vehiculoActual['usuario_id'];
         }
 
-        // ===== SUBIR IMAGEN =====
+        //SUBIR IMAGEN 
         $nombreImagen = $_FILES['imagen']['name'] ?? '';
         $tmp = $_FILES['imagen']['tmp_name'] ?? '';
         // SI SUBE NUEVA IMAGEN
