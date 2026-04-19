@@ -40,6 +40,10 @@ header div h1 {
     margin: 0;
 }
 
+header div a {
+    text-decoration: none;
+}
+
 header nav {
     display: flex;
     align-items: center;
