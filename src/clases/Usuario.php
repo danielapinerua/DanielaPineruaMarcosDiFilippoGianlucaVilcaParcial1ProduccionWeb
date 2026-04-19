@@ -1,18 +1,20 @@
 <?php
 
-class Usuario {
-    private $id;
-    private $nombre;
-    private $email;
-    private $password;
-    private $rol;
+require_once __DIR__ . '/../../exceptions/UsuarioException.php';
 
-    public function __construct($id, $nombre, $email, $password, $rol) {
+class Usuario {
+    private int $id;
+    private string $nombre;
+    private string $email;
+    private string $password;
+    private string $rol;
+
+    public function __construct(int $id, string $nombre, string $email, string $password, string $rol) {
         $this->id = $id;
-        $this->nombre = $nombre;
-        $this->email = $email;
-        $this->password = $password;
-        $this->rol = $rol;
+        $this->setNombre($nombre);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setRol($rol);
     }
 
     public function getId() {
@@ -35,15 +37,31 @@ class Usuario {
         return $this->rol;
     }
 
-    public function setNombre($nombre) {
-        $this->nombre = $nombre;
+    public function setNombre(string $nombre): void {
+        if (!empty($nombre)) {
+            $this->nombre = $nombre;
+        } else {
+            throw new UsuarioException("Nombre inválido");
+        }
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setEmail(string $email): void {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $email;
+        } else {
+            throw new UsuarioException("Email inválido");
+        }
     }
 
-    public function setRol($rol) {
+    public function setPassword(string $password): void {
+        if (!empty($password) && strlen($password) >= 6) {
+            $this->password = $password;
+        } else {
+            throw new UsuarioException("Contraseña inválida (mínimo 6 caracteres)");
+        }
+    }
+
+   public function setRol(string $rol): void {
     $this->rol = $rol;
 }
 
