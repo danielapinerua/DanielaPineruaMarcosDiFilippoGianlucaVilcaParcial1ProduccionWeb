@@ -10,6 +10,7 @@ $stmt = $conexion->prepare($sql);
 $stmt->execute([':id' => $id]);
 
 $vehiculo = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <main>

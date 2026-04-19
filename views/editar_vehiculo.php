@@ -1,9 +1,10 @@
 <?php
 include_once('componentes/header.php');
 include_once('componentes/session.php');
-require_once('../src/conexion/BD.php');
+require_once('../src/clases/BD.php');
 
 $id = $_GET['id'];
+
 
 $conexion = BD::getInstancia();
 $sql = "SELECT * FROM vehiculos WHERE id = :id";
