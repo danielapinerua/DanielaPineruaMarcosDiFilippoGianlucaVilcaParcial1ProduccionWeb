@@ -16,11 +16,13 @@ body {
 main {
     min-height: calc(100vh - 70px);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 main section {
     max-width: 1100px;
+    width: 100%;
     margin: 0 auto;
     padding: 6rem 2.5rem;
     position: relative;
@@ -102,7 +104,6 @@ main section p {
     animation: fadeUp 0.6s ease 0.2s both;
 }
 
-/* Botones */
 .hero-btns {
     display: flex;
     gap: 12px;
@@ -175,30 +176,216 @@ main section p {
 }
 
 @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
+
+
+.destacados-wrapper {
+    position: relative;
+    z-index: 2;
+    background: #1a1f35;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.destacados-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 80% at 0% 50%, rgba(124, 58, 237, 0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 100% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 55%);
+    animation: shiftGlow 8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.destacados-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+@keyframes shiftGlow {
+    0%   { opacity: 0.7; transform: scale(1) translateX(0); }
+    100% { opacity: 1;   transform: scale(1.1) translateX(3%); }
+}
+
+.destacados-section {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5rem 2.5rem !important;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.6s ease 0.5s both;
+}
+
+.destacados-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.destacados-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(79, 70, 229, 0.12);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a5b4fc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.destacados-header h3 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+    margin: 0 0 0.5rem;
+}
+
+.destacados-sub {
+    font-size: 0.95rem;
+    color: rgba(200, 210, 240, 0.5);
+    margin: 0;
+}
+
+.destacados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.25rem;
+}
+
+.car-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    background: rgba(79, 70, 229, 0.08);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.car-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.car-rank {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.9rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.rank-gold   { background: rgba(251, 191, 36, 0.2);  color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); }
+.rank-silver { background: rgba(148, 163, 184, 0.2); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.35); }
+.rank-bronze { background: rgba(251, 146, 60, 0.2);  color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.35); }
+
+.car-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.car-body h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.car-origin {
+    font-size: 11px;
+    font-weight: 500;
+    color: #a5b4fc;
+    margin: 0 0 0.4rem;
+    letter-spacing: 0.3px;
+}
+
+.car-desc {
+    font-size: 13px;
+    color: rgba(200, 210, 240, 0.6);
+    line-height: 1.65;
+    margin: 0 0 0.75rem;
+}
+
+.car-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
 
 @media (max-width: 768px) {
     main section {
         padding: 4rem 1.5rem;
     }
 
+    .destacados-section {
+        padding: 3.5rem 1.5rem !important;
+    }
+
     .hero-stats {
         gap: 1.5rem;
         flex-wrap: wrap;
+    }
+
+    .car-image {
+        height: 160px;
     }
 }
 
 @media (max-width: 480px) {
     main section {
         padding: 3rem 1rem;
+    }
+
+    .destacados-section {
+        padding: 3rem 1rem !important;
     }
 
     main section h2 {
