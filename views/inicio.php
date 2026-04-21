@@ -71,7 +71,7 @@
 
                 <div class="car-card">
                     <div class="car-rank rank-gold">1</div>
-                    <img src="assets/img/picapiedras.jpg" alt="Auto de los Picapiedras" class="car-image">
+                    <img src="assets/img/picapiedra.webp" alt="Auto de los Picapiedras" class="car-image">
                     <div class="car-body">
                         <h4>El auto de los Picapiedras</h4>
                         <p class="car-origin">Los Picapiedras · Bedrock, Edad de Piedra</p>
@@ -86,7 +86,7 @@
 
                 <div class="car-card">
                     <div class="car-rank rank-silver">2</div>
-                    <img src="assets/img/homero.jpg" alt="Auto de Homero Simpson" class="car-image">
+                    <img src="assets/img/homero.webp" alt="Auto de Homero Simpson" class="car-image">
                     <div class="car-body">
                         <h4>El auto de Homero Simpson</h4>
                         <p class="car-origin">Los Simpson · Springfield, USA</p>
@@ -101,7 +101,7 @@
 
                 <div class="car-card">
                     <div class="car-rank rank-bronze">3</div>
-                    <img src="assets/img/bumblebee.jpg" alt="Bumblebee Camaro" class="car-image">
+                    <img src="assets/img/bumblebee.webp" alt="Bumblebee Camaro" class="car-image">
                     <div class="car-body">
                         <h4>Bumblebee — Camaro Amarillo</h4>
                         <p class="car-origin">Transformers · Planeta Cybertron / Tierra</p>
