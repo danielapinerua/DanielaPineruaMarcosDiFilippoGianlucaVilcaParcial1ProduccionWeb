@@ -3,6 +3,8 @@
   Tu navegador no soporta el video.
 </video>
 
+[Ver video](https://share.descript.com/view/iqxgZYljbAU)
+
 # Autenticación
 
 Gestión de sesión de usuario: inicio y cierre de sesión.
