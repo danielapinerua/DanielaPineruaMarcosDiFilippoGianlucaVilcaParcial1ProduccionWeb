@@ -3,7 +3,16 @@
   Tu navegador no soporta el video.
 </video>
 
-[Ver Video de Presentación ](https://share.descript.com/view/iqxgZYljbAU)
+# Usuarios de Prueba
+
+| ID | Nombre   | Email             | Contraseña | Rol      |
+|----|----------|-------------------|------------|----------|
+| 1  | admin    | admin@gmail.com   | `12345`    | admin    |
+| 2  | Daniela  | daniela@mail.com  | `1234`     | empleado |
+| 3  | Marcos   | marcos@mail.com   | `1234`     | empleado |
+| 4  | Gianluca | gianluca@mail.com | `1234`     | empleado |
+
+> **Nota:** Las contraseñas están hasheadas con MD5 en la base de datos.
 
 # Autenticación
 
@@ -55,6 +64,8 @@ Autentica al usuario con email y contraseña contra la base de datos.
 
 
 # Base de datos - `agencia`
+
+<img src="./bd/DER.png" width="100%" />
 
 Dentro de la carpeta bd se encuentra el archivo:
 * agencia.sql: contiene la estructura completa de la base de datos del sistema, incluyendo la creación de tablas (usuarios, vehículos, etc.), relaciones y datos iniciales.
