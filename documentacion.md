@@ -3,6 +3,17 @@
   Tu navegador no soporta el video.
 </video>
 
+# Usuarios de Prueba
+
+| ID | Nombre   | Email             | Contraseña | Rol      |
+|----|----------|-------------------|------------|----------|
+| 1  | admin    | admin@gmail.com   | `12345`    | admin    |
+| 2  | Daniela  | daniela@mail.com  | `1234`     | empleado |
+| 3  | Marcos   | marcos@mail.com   | `1234`     | empleado |
+| 4  | Gianluca | gianluca@mail.com | `1234`     | empleado |
+
+> **Nota:** Las contraseñas están hasheadas con MD5 en la base de datos.
+
 # Autenticación
 
 Gestión de sesión de usuario: inicio y cierre de sesión.
